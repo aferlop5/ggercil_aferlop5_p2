@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "ggercil_aferlop5_p2" "\0"
+            VALUE "CompanyName", "upv.epsa.ihm" "\0"
+            VALUE "FileDescription", "ggercli_aferlop5_p2" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "ggercil_aferlop5_p2" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "ggercil_aferlop5_p2.exe" "\0"
-            VALUE "ProductName", "ggercil_aferlop5_p2" "\0"
+            VALUE "InternalName", "ggercli_aferlop5_p2" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2025 upv.epsa.ihm. All rights reserved." "\0"
+            VALUE "OriginalFilename", "ggercli_aferlop5_p2.exe" "\0"
+            VALUE "ProductName", "ggercli_aferlop5_p2" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
