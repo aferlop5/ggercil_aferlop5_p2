@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 // Importa la vista principal definida en main_view.dart.
 import 'views/main_view.dart';
+// Tema de la app: paleta y estilos.
+import 'theme/app_colors.dart';
 
 // Función principal: punto de entrada de la aplicación.
 // runApp monta el widget raíz MyApp en la pantalla.
@@ -16,9 +18,10 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => const MaterialApp(
+  Widget build(BuildContext context) => MaterialApp(
     title: 'P1 IPC', // Título en el interruptor de tareas
     debugShowCheckedModeBanner: false, // Oculta la etiqueta de depuración
-    home: MainView(), // Pantalla inicial
+    theme: buildAppTheme(), // Aplica el tema global con la paleta de colores
+    home: const MainView(), // Pantalla inicial
   );
 }

@@ -16,7 +16,6 @@ class MainView extends StatelessWidget {
     appBar: AppBar(
       // Barra superior con el título de la pantalla
       title: const Text('Pantalla Principal'),
-      backgroundColor: Colors.teal,
     ),
     body: Center(
       // Centra el contenido en el eje principal
@@ -35,8 +34,15 @@ class MainView extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               margin: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.teal[100],
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
               ),
               child: const Text(
                 '¡Bienvenido a la App!',
@@ -49,20 +55,13 @@ class MainView extends StatelessWidget {
           const SizedBox(height: 60),
           // Botón que también navega a la segunda pantalla
           ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 0, 65, 150),
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const ListViewScreen()),
             ), // Navega a ListViewScreen al pulsar el botón
             child: const Text(
               'Ir a Segunda Pantalla',
-              style: TextStyle(color: Colors.white, fontSize: 16),
+              style: TextStyle(fontSize: 16),
             ),
           ),
         ],

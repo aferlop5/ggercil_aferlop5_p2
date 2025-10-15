@@ -1,9 +1,9 @@
 // Importa el framework de Flutter y los widgets de Material Design.
 import 'package:flutter/material.dart';
-// Librería externa para carga y cache de imágenes de red.
-import 'package:cached_network_image/cached_network_image.dart';
 // Modelo de datos y datos mock.
 import '../models/item.dart';
+// Paleta de colores
+import '../theme/app_colors.dart';
 
 /// Pantalla que muestra un listado dinámico de elementos (Práctica 2).
 /// - Usa ListView.builder para renderizar los ítems.
@@ -15,10 +15,7 @@ class ListViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Text('Listado de elementos'),
-      backgroundColor: Colors.teal,
-    ),
+    appBar: AppBar(title: const Text('Listado de elementos')),
     body: ListView.builder(
       itemCount: mockItems.length,
       itemBuilder: (context, index) {
@@ -53,7 +50,7 @@ class _ItemTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
@@ -82,6 +79,7 @@ class _ItemTile extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
+                                color: AppColors.olive,
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -94,13 +92,13 @@ class _ItemTile extends StatelessWidget {
                                 vertical: 4,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.teal.shade50,
+                                color: AppColors.sand,
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
                                 item.tag!,
-                                style: TextStyle(
-                                  color: Colors.teal.shade800,
+                                style: const TextStyle(
+                                  color: AppColors.olive,
                                   fontSize: 12,
                                 ),
                               ),
@@ -112,7 +110,7 @@ class _ItemTile extends StatelessWidget {
                         item.description,
                         style: const TextStyle(
                           fontSize: 14,
-                          color: Colors.black87,
+                          color: AppColors.earth,
                         ),
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
@@ -138,30 +136,29 @@ class _ItemTile extends StatelessWidget {
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: Colors.teal.shade100,
+        color: AppColors.sand,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: const Icon(Icons.image, color: Colors.white70),
+      child: const Icon(Icons.image, color: AppColors.olive),
     );
 
-    if (item.imageUrl == null || item.imageUrl!.isEmpty) {
+    if (item.assetPath == null || item.assetPath!.isEmpty) {
       return ClipRRect(borderRadius: border.borderRadius, child: placeholder);
     }
 
-    // Usa CachedNetworkImage para cachear y mostrar imágenes de red.
+    // Carga de imagen local desde assets.
     return ClipRRect(
       borderRadius: border.borderRadius,
-      child: CachedNetworkImage(
-        imageUrl: item.imageUrl!,
+      child: Image.asset(
+        item.assetPath!,
         width: size,
         height: size,
         fit: BoxFit.cover,
-        placeholder: (_, __) => placeholder,
-        errorWidget: (_, __, ___) => Container(
+        errorBuilder: (_, __, ___) => Container(
           width: size,
           height: size,
-          color: Colors.grey.shade200,
-          child: const Icon(Icons.broken_image, color: Colors.grey),
+          color: AppColors.earth.withOpacity(0.1),
+          child: const Icon(Icons.broken_image, color: AppColors.earth),
         ),
       ),
     );
