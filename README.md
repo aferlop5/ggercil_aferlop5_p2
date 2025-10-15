@@ -121,18 +121,45 @@ android/ ios/ web/  # Plataformas
 ## Novedades Práctica 2
 
 - Pantalla de listado dinámico con `ListView.builder` en `lib/views/list_view.dart`.
-- Modelo de datos `Item` en `lib/models/item.dart` con `id`, `title`, `description`, `imageUrl` y `tag`.
-- Integración de librería externa `cached_network_image` para carga y caché de imágenes de red.
+- Modelo de datos `Item` en `lib/models/item.dart` con `id`, `title`, `description`, `assetPath` y `tag` (opcional).
 - Interacción: al tocar un elemento se muestra un `SnackBar` indicando que el detalle llegará en la Fase 3.
+- Paleta de colores aplicada globalmente en `lib/theme/app_colors.dart`:
+  - Fondo base (Marfil) `#FAFAF8`
+  - Verde oliva (Primario) `#72845D`
+  - Marrón tierra (Texto secundario) `#8C7051`
+  - Blanco puro (Superficies) `#FFFFFF`
+  - Amarillo arena (Acentos) `#E8D5B5`
 
-Cómo probar el listado:
+### Listado de árboles y assets locales
+
+Los elementos mostrados en el listado representan árboles concretos. Las imágenes se cargan desde assets locales:
+
+Rutas esperadas (coloca los ficheros en `assets/images/`):
+
+- `assets/images/olivo.jpg`
+- `assets/images/naranjo.jpg`
+- `assets/images/limonero.jpg`
+- `assets/images/pino.jpg`
+- `assets/images/roble.jpg`
+- `assets/images/almendro.jpg`
+- `assets/images/cerezo.jpg`
+- `assets/images/encina.jpg`
+- `assets/images/nogal.jpg`
+
+Si cambias los nombres de los ficheros, actualiza `assetPath` en `lib/models/item.dart`.
+
+Nota: La carpeta `assets/images/` ya está declarada en `pubspec.yaml`, por lo que no es necesario editar el archivo para añadir cada imagen individualmente.
+
+### Cómo probar el listado
 
 - Desde la pantalla principal (MainView), pulsa el contenedor de bienvenida o el botón "Ir a Segunda Pantalla" para navegar al listado.
-- Desplázate: hay suficientes elementos (30) para que aparezca scroll.
+- Desplázate por la lista.
 - Toca cualquier ítem para ver el mensaje de `SnackBar`.
 
-Justificación de la dependencia `cached_network_image`:
+### Estilo visual y tema
 
-- Mejora el rendimiento y la experiencia de usuario al cachear imágenes de red, evitando recargas innecesarias.
-- Proporciona placeholders y gestión de errores de forma sencilla y personalizable.
+- El `AppBar`, botones y acentos usan el verde oliva.
+- El fondo de la app es marfil y las tarjetas usan blanco puro.
+- Los textos secundarios/descripciones usan marrón tierra.
+
 
