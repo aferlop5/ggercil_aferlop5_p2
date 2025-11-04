@@ -37,7 +37,25 @@ class _ItemTile extends StatelessWidget {
     return InkWell(
       onTap: () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => ItemDetailScreen(item: item)),
+        PageRouteBuilder(
+          transitionDuration: const Duration(milliseconds: 260),
+          pageBuilder: (_, __, ___) => ItemDetailScreen(item: item),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final curved = CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeOutCubic,
+            );
+            final fade = Tween<double>(begin: 0.0, end: 1.0).animate(curved);
+            final slide = Tween<Offset>(
+              begin: const Offset(0, 0.06),
+              end: Offset.zero,
+            ).animate(curved);
+            return FadeTransition(
+              opacity: fade,
+              child: SlideTransition(position: slide, child: child),
+            );
+          },
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
