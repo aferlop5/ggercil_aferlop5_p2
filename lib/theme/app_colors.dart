@@ -62,3 +62,48 @@ ThemeData buildAppTheme() {
     dividerColor: AppColors.earth.withOpacity(0.2),
   );
 }
+
+/// Widget reutilizable para mostrar información con un estilo coherente.
+///
+/// Requisitos:
+/// - StatelessWidget con dos parámetros obligatorios: `title` y `subtitle`.
+/// - Muestra un ListTile con icono de hoja verde a la izquierda.
+/// - Fondo blanco, esquinas redondeadas, sombra suave y padding alrededor.
+class InfoTile extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
+  const InfoTile({super.key, required this.title, required this.subtitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.pureWhite,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: ListTile(
+          leading: const Icon(Icons.eco, color: Colors.green),
+          title: Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(subtitle),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 12,
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 // Importa la segunda pantalla (ListViewScreen) para navegar desde MainView.
 import 'list_view.dart';
+import '../theme/app_colors.dart';
 
 /// Pantalla principal con mensaje de bienvenida y navegación a la segunda pantalla.
 // MainView muestra un mensaje de bienvenida y un botón para navegar.
@@ -29,26 +30,9 @@ class MainView extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (_) => const ListViewScreen()),
             ), // Navega a ListViewScreen
-            child: Container(
-              // Caja estilizada que muestra el mensaje de bienvenida
-              padding: const EdgeInsets.all(16),
-              margin: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: const Text(
-                '¡Bienvenido a la App!',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20),
-              ),
+            child: const InfoTile(
+              title: '¡Bienvenido a la App!',
+              subtitle: 'Explora el listado y descubre más detalles.',
             ),
           ),
           // Separador para dejar espacio entre elementos

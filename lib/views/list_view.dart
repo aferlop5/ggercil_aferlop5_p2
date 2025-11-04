@@ -35,17 +35,10 @@ class _ItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'Próximamente verás el detalle de "${item.title}" en la Fase 3',
-            ),
-            behavior: SnackBarBehavior.floating,
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      },
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => ItemDetailScreen(item: item)),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         child: Container(
@@ -160,6 +153,57 @@ class _ItemTile extends StatelessWidget {
           color: AppColors.earth.withOpacity(0.1),
           child: const Icon(Icons.broken_image, color: AppColors.earth),
         ),
+      ),
+    );
+  }
+}
+
+/// Pantalla de detalle para un elemento del listado.
+class ItemDetailScreen extends StatelessWidget {
+  final Item item;
+
+  const ItemDetailScreen({super.key, required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(item.title)),
+      body: ListView(
+        children: [
+          // Reutilizamos el widget personalizado InfoTile al inicio.
+          InfoTile(title: item.title, subtitle: item.description),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: item.assetPath == null || item.assetPath!.isEmpty
+                  ? Container(
+                      height: 180,
+                      color: AppColors.sand,
+                      child: const Center(
+                        child: Icon(Icons.image, color: AppColors.olive),
+                      ),
+                    )
+                  : Image.asset(
+                      item.assetPath!,
+                      height: 220,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      errorBuilder: (_, __, ___) => Container(
+                        height: 180,
+                        color: AppColors.earth.withOpacity(0.1),
+                        child: const Center(
+                          child: Icon(
+                            Icons.broken_image,
+                            color: AppColors.earth,
+                          ),
+                        ),
+                      ),
+                    ),
+            ),
+          ),
+          const SizedBox(height: 24),
+        ],
       ),
     );
   }
